@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Quotelist
  * @subpackage Quotelist/includes
- * @author     Your Name <email@example.com>
+ * @author     James Kemp <me@jckemp.com>
  */
 class Quotelist_Activator {
 

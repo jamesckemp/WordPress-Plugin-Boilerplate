@@ -18,7 +18,7 @@
  *
  * @package    Quotelist
  * @subpackage Quotelist/admin
- * @author     Your Name <email@example.com>
+ * @author     James Kemp <me@jckemp.com>
  */
 class Quotelist_Admin {
 

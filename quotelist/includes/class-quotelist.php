@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    Quotelist
  * @subpackage Quotelist/includes
- * @author     Your Name <email@example.com>
+ * @author     James Kemp <me@jckemp.com>
  */
 class Quotelist {
 
@@ -75,6 +75,7 @@ class Quotelist {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_shared_hooks();
 
 	}
 
@@ -118,6 +119,17 @@ class Quotelist {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-quotelist-public.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * and admin area of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'shared/class-quotelist-shared.php';
+
+		/**
+		 * The class responsible for adding post types.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-quotelist-post-types.php';
 
 		$this->loader = new Quotelist_Loader();
 
@@ -169,6 +181,21 @@ class Quotelist {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the public-facing and admin area
+	 * functionality of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_shared_hooks() {
+
+    	$plugin_shared = new Quotelist_Shared( $this->get_quotelist(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_shared, 'register_post_types' );
 
 	}
 
